@@ -14,6 +14,22 @@ function addToHistory(cityName) {
     });
 
     $("#history").append(historyItem);
-    updateDisplayedHistory();
+    DisplayedHistory();
   }
 }
+
+function DisplayedHistory() {
+    $(".history-container").empty();
+  
+    for (var i = 0; i < searchHistory.length; i++) {
+      var historyItem = $("<div>")
+        .addClass("history-item")
+        .text(searchHistory[i]);
+  
+      historyItem.on("click", function () {
+        getWeatherData($(this).text());
+      });
+  
+      $(".history-container").append(historyItem);
+    }
+  }
