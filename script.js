@@ -73,3 +73,43 @@ function getWeatherData(cityName) {
       }
     });
   }
+
+function updateWeatherUI(data) {
+  
+    var cityName = data.city.name; 
+    var currentDate = data.list[0].dt_txt.split(' ')[0];
+    var weatherIcon = data.list[0].weather[0].icon; 
+    var currentTemperature = data.list[0].main.temp;
+    var humidity = data.list[0].main.humidity;
+    var windSpeed = data.list[0].wind.speed;
+  
+    var h2Content = "<h2>" +
+      cityName + " - " +
+      currentDate +
+      "<img src='http://openweathermap.org/img/w/" + weatherIcon + ".png' alt='Weather Icon'>" +
+      "</h2>";
+  
+    $("#today").html(h2Content +
+      "<p>Temperature: " + currentTemperature + "</p><p>Humidity: " + humidity + "</p><p>Wind Speed: " + windSpeed + "</p>");
+  
+      $("#forecast").empty();
+  
+    for (var i = 1; i <= 5; i++) {
+      var forecastDate = data.list[i].dt_txt.split(' ')[0];
+      var forecastTemperature = data.list[i].main.temp;
+      var forecastHumidity = data.list[i].main.humidity;
+      var forecastWindSpeed = data.list[i].wind.speed;
+      var forecastWeatherIcon = data.list[i].weather[0].icon;
+  
+      var forecastBox = $("<div>").addClass("forecast-box");
+      forecastBox.append(
+        "<p>Date: " + forecastDate + "</p>" +
+        "<img src='http://openweathermap.org/img/w/" + forecastWeatherIcon + ".png' alt='Forecast Weather Icon'>" +
+        "<p>Temperature: " + forecastTemperature + "</p><p>Humidity: " + forecastHumidity + "</p><p>Wind Speed: " + forecastWindSpeed + "</p>"
+      );
+  
+      $("#forecast").append(forecastBox);
+    }
+
+  localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+}
