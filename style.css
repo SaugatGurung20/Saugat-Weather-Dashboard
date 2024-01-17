@@ -1,0 +1,41 @@
+.forecast-section {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .forecast-box {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    display: inline-block;
+  }
+
+  .forecast-title {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+
+  .present-weather {
+    border: 1px solid #ddd;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+  }
+
+
+  .history-item {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-align: center;
+  }
+  
+  .history-item:hover {
+    background-color: #e2e6ea;
+  }
