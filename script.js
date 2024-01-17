@@ -39,3 +39,16 @@ function DisplayedHistory() {
       addToHistory(searchHistory[i]);
     }
   }
+
+  // Load search history from local storage on page load
+$(document).ready(function () {
+    // Get search history from local storage
+    var storedSearchHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
+  
+    // Update the global searchHistory variable
+    searchHistory = storedSearchHistory;
+  
+    // Call the function to update the displayed history
+    displaySearchHistory();
+    DisplayedHistory(); // Add this line to ensure history is displayed on page load
+  });
