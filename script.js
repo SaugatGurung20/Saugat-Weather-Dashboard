@@ -52,3 +52,20 @@ $(document).ready(function () {
     displaySearchHistory();
     DisplayedHistory(); // Add this line to ensure history is displayed on page load
   });
+
+  // Function to handle the form submission
+$("#search-form").submit(function (event) {
+    event.preventDefault();
+  
+    // Get the city name from the input
+    var cityName = $("#search-input").val().trim();
+  
+    // Check if the city name is not empty
+    if (cityName !== "") {
+      // Call the function to get weather data
+      getWeatherData(cityName);
+  
+      // Clear the input field
+      $("#search-input").val("");
+    }
+  });
