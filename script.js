@@ -40,32 +40,36 @@ function DisplayedHistory() {
     }
   }
 
-  // Load search history from local storage on page load
 $(document).ready(function () {
-    // Get search history from local storage
     var storedSearchHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
-  
-    // Update the global searchHistory variable
     searchHistory = storedSearchHistory;
-  
-    // Call the function to update the displayed history
     displaySearchHistory();
-    DisplayedHistory(); // Add this line to ensure history is displayed on page load
+    DisplayedHistory(); 
   });
 
-  // Function to handle the form submission
 $("#search-form").submit(function (event) {
     event.preventDefault();
-  
-    // Get the city name from the input
-    var cityName = $("#search-input").val().trim();
-  
-    // Check if the city name is not empty
-    if (cityName !== "") {
-      // Call the function to get weather data
+      var cityName = $("#search-input").val().trim();
+      if (cityName !== "") {
       getWeatherData(cityName);
   
-      // Clear the input field
       $("#search-input").val("");
     }
   });
+
+function getWeatherData(cityName) {
+    var apiKey = '155762a56bacbcb490402c8eeb8ef0b7';
+    var apiUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=" + apiKey;
+  
+    $.ajax({
+      url: apiUrl,
+      method: "GET",
+      success: function (response) {
+        updateWeatherUI(response);
+        addToHistory(cityName);
+      },
+      error: function (error) {
+        console.log("Error fetching weather data: ", error);
+      }
+    });
+  }
