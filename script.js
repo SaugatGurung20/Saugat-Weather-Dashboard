@@ -33,3 +33,9 @@ function DisplayedHistory() {
       $(".history-container").append(historyItem);
     }
   }
+
+  function displaySearchHistory() {
+    for (var i = 0; i < searchHistory.length; i++) {
+      addToHistory(searchHistory[i]);
+    }
+  }
